@@ -75,4 +75,29 @@ const isDark = useDark()
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+@media (max-width: 680px) {
+  .toggle-switch {
+    width: 85px;
+    height: 40px;
+  }
+
+  .switch-label {
+    height: 40px;
+  }
+
+  .slider::before {
+    top: 11px;
+    left: 5px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+  }
+
+  .checkbox:checked ~ .slider::before {
+    -webkit-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+}
 </style>

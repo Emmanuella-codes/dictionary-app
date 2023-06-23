@@ -10,9 +10,7 @@ import ToggleBtn from './navCmp/ToggleBtn.vue'
 
 <template>
   <nav id="navbar">
-    <div
-      class="flex flex-row lg:mx-auto max-w-[90%] lg:w-[80%] items-center justify-between"
-    >
+    <div class="flex flex-row items-center justify-between">
       <!--logo-->
       <div class="flex justify-start">
         <img src="../assets/da-logo.png" class="w-full lg:w-2/4" alt="logo" />
