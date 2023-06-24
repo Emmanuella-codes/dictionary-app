@@ -72,7 +72,7 @@ export default {
       </main>
     </div>
     <!--result section-->
-    <section>
+    <section class="bg-white dark:bg-black">
       <ResultPage v-if="searchData" :data="searchData" class="my-24" />
     </section>
   </div>

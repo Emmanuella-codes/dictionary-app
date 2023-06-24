@@ -1,21 +1,119 @@
 <script setup>
 defineProps(['data'])
+
+const playAudio = (sound) => {
+  if (sound) {
+    const audio = new Audio(sound)
+    audio.play()
+  }
+}
 </script>
 
 <template>
-  <div>
+  <div id="content-container" class="h-screen w-full">
     <h1 class="text-center text-lg text-[#a58edb]">Search results for : {{ data[0].word }}</h1>
-    <div>
-      <div class="flex justify-between my-24" id="search-header">
+    <!--search result from api-->
+    <div class="max-w-[90%] mx-auto">
+      <!--word and audio-->
+      <div class="flex justify-between my-14" id="search-header">
         <div id="word">
-          <h2 id="boldWord" class="text-5xl font-semibold">{{ data[0].word }}</h2>
-          <h3 id="italicWord" class="text-2xl mt-3 text-[#aa8eeb]">{{ data[0].phonetic }}</h3>
+          <h2 id="boldWord" class="lg:text-5xl text-4xl font-semibold dark:text-slate-100">
+            {{ data[0].word }}
+          </h2>
+          <h3 id="italicWord" class="lg:text-2xl text-xl lg:pt-3 text-[#aa8eeb]">
+            {{ data[0].phonetic }}
+          </h3>
         </div>
         <div id="audio-btn">
-          <button></button>
+          <button @click="playAudio(`${data[0].phonetics[0].audio}`)"></button>
         </div>
       </div>
-      <div v-for="(result, index) in data" :key="index"></div>
+      <!--main content-->
+      <div>
+        <!--part of speech and hr-->
+        <div class="flex items-center gap-3">
+          <p class="lg:text-3xl text-xl font-semibold italic dark:text-slate-200">
+            {{ data[0].meanings[0].partOfSpeech }}
+          </p>
+          <span class="border-b-4 w-full pt-1 lg:pt-2"></span>
+        </div>
+
+        <div id="first-meaning" class="mt-3">
+          <h3 class="text-xl">Meaning</h3>
+          <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+            <li v-for="def in data[0].meanings[0].definitions.slice(0, 3)" :key="def">
+              {{ def.definition }}
+            </li>
+          </ul>
+          <div class="mt-2" v-if="data[0].meanings[0].definitions.example">
+            <span class="border-l-4"></span>
+            <p>{{ data[0].meanings[0].definitions.example }}</p>
+          </div>
+          <!--synonyms-->
+          <div class="mt-4" v-if="data[0].meanings[0].synonyms">
+            <h4 class="italic dark:text-slate-200">Synonyms</h4>
+            <ul class="flex flex-row gap-3">
+              <li
+                v-for="synonym in data[0].meanings[0].synonyms"
+                :key="synonym"
+                class="text-[#aa8eeb]"
+              >
+                {{ synonym }}
+              </li>
+            </ul>
+          </div>
+          <!--antonyms-->
+          <div class="mt-4" v-if="data[0].meanings[0].antonyms.length > 0">
+            <h4 class="italic">Antonyms</h4>
+            <ul>
+              <li v-for="antonym in data[0].meanings[0].antonyms" :key="antonym">
+                {{ antonym }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--second meaning and definition-->
+      <div class="mt-9" v-if="data[0].meanings[2]">
+        <!--part of speech and hr-->
+        <div class="flex items-center gap-3">
+          <p class="lg:text-3xl text-xl font-semibold italic dark:text-slate-200">
+            {{ data[0].meanings[1].partOfSpeech }}
+          </p>
+          <span class="border-b-4 w-full pt-1 lg:pt-2"></span>
+        </div>
+
+        <div id="first-meaning" class="mt-3">
+          <h3 class="text-xl">Meaning</h3>
+          <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+            <li v-for="def in data[0].meanings[1].definitions.slice(0, 3)" :key="def">
+              {{ def.definition }}
+            </li>
+          </ul>
+          <div class="mt-2" v-if="data[0].meanings[1].definitions.example">
+            <span class="border-l-4"></span>
+            <p>{{ data[0].meanings[1].definitions.example }}</p>
+          </div>
+          <!--synonyms-->
+          <div class="mt-4" v-if="data[0].meanings[1].definitions[0].synonyms.length > 0">
+            <h4 class="italic">Synonyms</h4>
+            <ul class="flex flex-row">
+              <li v-for="synonym in data[0].meanings[1].definitions[0].synonyms" :key="synonym">
+                {{ synonym }}
+              </li>
+            </ul>
+          </div>
+          <!--antonyms-->
+          <div class="mt-4" v-if="data[0].meanings[1].definitions[0].antonyms.length > 0">
+            <h4 class="italic">Antonyms</h4>
+            <ul>
+              <li v-for="antonym in data[0].meanings[1].definitions[0].antonyms" :key="antonym">
+                {{ antonym }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
