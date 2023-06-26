@@ -97,7 +97,7 @@ const isDark = useDark()
   .checkbox:checked ~ .slider::before {
     -webkit-transform: translateX(10px);
     -ms-transform: translateX(10px);
-    transform: translateX(10px);
+    transform: translateX(53px);
   }
 }
 </style>
