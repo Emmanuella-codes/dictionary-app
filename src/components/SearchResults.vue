@@ -1,10 +1,12 @@
-<script setup>
-defineProps(['data'])
-
-const playAudio = (sound) => {
-  if (sound) {
-    const audio = new Audio(sound)
-    audio.play()
+<script>
+export default {
+  methods: {
+    playAudio(sound) {
+      if (sound) {
+        const audio = new Audio(sound)
+        audio.play()
+      }
+    }
   }
 }
 </script>
