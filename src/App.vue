@@ -8,5 +8,3 @@ import { RouterLink, RouterView } from 'vue-router'
   </div>
   <RouterView></RouterView>
 </template>
-
-<style scoped></style>

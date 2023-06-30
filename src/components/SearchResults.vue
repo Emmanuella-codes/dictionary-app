@@ -1,10 +1,22 @@
-<script setup>
-defineProps(['data'])
+<script>
+export default {
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    playAudio(sound) {
+      if (sound) {
+        const audio = new Audio(sound)
+        audio.play()
+      }
+    },
 
-const playAudio = (sound) => {
-  if (sound) {
-    const audio = new Audio(sound)
-    audio.play()
+    onWordClick(word) {
+      this.$emit('word-click', word)
+    }
   }
 }
 </script>
@@ -13,7 +25,7 @@ const playAudio = (sound) => {
   <div id="content-container" class="w-full bg-white dark:bg-black">
     <h1 class="text-center text-lg text-[#a58edb]">Search results for : {{ data[0].word }}</h1>
     <!--search result from api-->
-    <div class="max-w-[90%] mx-auto">
+    <div v-if="data" class="max-w-[90%] mx-auto">
       <!--word and audio-->
       <div class="flex justify-between my-14" id="search-header">
         <div id="word">
@@ -78,7 +90,8 @@ const playAudio = (sound) => {
               <li
                 v-for="synonym in data[0].meanings[0].synonyms"
                 :key="synonym"
-                class="text-[#aa8eeb]"
+                @click="onWordClick(synonym)"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ synonym }}
               </li>
@@ -91,7 +104,8 @@ const playAudio = (sound) => {
               <li
                 v-for="antonym in data[0].meanings[0].antonyms"
                 :key="antonym"
-                class="text-[#aa8eeb]"
+                @click="onWordClick(antonym)"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ antonym }}
               </li>
@@ -116,10 +130,6 @@ const playAudio = (sound) => {
               {{ def.definition }}
             </li>
           </ul>
-          <!-- <div class="mt-2" v-if="data[0].meanings[1].definitions.example">
-            <span class="border-l-4"></span>
-            <p>{{ data[0].meanings[1].definitions.example }}</p>
-          </div> -->
           <!--synonyms-->
           <div class="mt-4" v-if="data[0].meanings[1]?.synonyms.length">
             <h4 class="italic dark:text-slate-200 text-lg">Synonyms</h4>
@@ -127,7 +137,8 @@ const playAudio = (sound) => {
               <li
                 v-for="synonym in data[0].meanings[1].synonyms"
                 :key="synonym"
-                class="text-[#aa8eeb]"
+                @click="onWordClick(synonym)"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ synonym }}
               </li>
@@ -138,9 +149,10 @@ const playAudio = (sound) => {
             <h4 class="italic dark:text-slate-200 text-lg">Antonyms</h4>
             <ul class="flex flex-row lg:gap-3 flex-wrap gap-2">
               <li
-                v-for="antonym in data[0].meanings[1].definitions[0].antonyms"
+                v-for="antonym in data[0].meanings[1].antonyms"
                 :key="antonym"
-                class="text-[#aa8eeb]"
+                @click="onWordClick(antonym)"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ antonym }}
               </li>
@@ -180,5 +192,18 @@ button::before {
 button:active {
   border-radius: 100%;
   box-shadow: inset 0px 0px 10px 0px rgb(240, 237, 237);
+}
+
+@media (max-width: 767px) {
+  button {
+    font-size: 12px;
+    padding: 3px;
+    margin-top: 10px;
+  }
+
+  button::before {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>
