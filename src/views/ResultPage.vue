@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       dataResults: null,
+      errorResult: null,
       isLoading: false
     }
   },
@@ -42,6 +43,13 @@ export default {
           this.isLoading = true
         })
         .catch((err) => {
+          if (err) {
+            this.errorResult = {
+              title: err.response.data.title,
+              message: err.response.data.message
+            }
+            this.$router.push('/not-found')
+          }
           console.log(err)
         })
     },
