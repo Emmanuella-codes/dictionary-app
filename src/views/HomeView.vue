@@ -16,9 +16,8 @@ export default {
   methods: {
     handleSearch(searchWord) {
       this.isLoading = true
-      setTimeout(() => {
-        this.$router.push(`/${searchWord}`)
-      }, 3000)
+
+      this.$router.push(`/${searchWord}`)
     }
   }
 }

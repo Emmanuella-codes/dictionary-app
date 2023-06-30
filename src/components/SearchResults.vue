@@ -91,7 +91,7 @@ export default {
                 v-for="synonym in data[0].meanings[0].synonyms"
                 :key="synonym"
                 @click="onWordClick(synonym)"
-                class="text-[#aa8eeb]"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ synonym }}
               </li>
@@ -105,7 +105,7 @@ export default {
                 v-for="antonym in data[0].meanings[0].antonyms"
                 :key="antonym"
                 @click="onWordClick(antonym)"
-                class="text-[#aa8eeb]"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ antonym }}
               </li>
@@ -138,7 +138,7 @@ export default {
                 v-for="synonym in data[0].meanings[1].synonyms"
                 :key="synonym"
                 @click="onWordClick(synonym)"
-                class="text-[#aa8eeb]"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ synonym }}
               </li>
@@ -152,7 +152,7 @@ export default {
                 v-for="antonym in data[0].meanings[1].antonyms"
                 :key="antonym"
                 @click="onWordClick(antonym)"
-                class="text-[#aa8eeb]"
+                class="text-[#aa8eeb] cursor-pointer"
               >
                 {{ antonym }}
               </li>

@@ -1,6 +1,7 @@
 <script>
 import SearchResults from '../components/SearchResults.vue'
 import HomeCmp from '../components/HomeCmp.vue'
+// import LoaderCmp from '../components/LoaderCmp.vue'
 import FooterCmp from '../components/FooterCmp.vue'
 import axios from 'axios'
 
@@ -12,7 +13,8 @@ export default {
   },
   data() {
     return {
-      dataResults: null
+      dataResults: null,
+      isLoading: false
     }
   },
   //check for new actions performed on the route param
@@ -37,6 +39,7 @@ export default {
         .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`)
         .then((res) => {
           this.dataResults = res.data
+          this.isLoading = true
         })
         .catch((err) => {
           console.log(err)
