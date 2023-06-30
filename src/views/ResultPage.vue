@@ -15,17 +15,36 @@ export default {
       dataResults: null
     }
   },
+  //check for new actions performed on the route param
+  //used to trigger click on synonyms and antonyms
+  watch: {
+    '$route.params.word'(newValue) {
+      if (newValue) {
+        this.searchData(newValue)
+      }
+    }
+  },
+  created() {
+    //check if the link has a param
+    if (this.$route.params.word) {
+      //pass the param word into the searchData function
+      this.searchData(this.$route.params.word)
+    }
+  },
   methods: {
     searchData(searchWord) {
       axios
         .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`)
         .then((res) => {
           this.dataResults = res.data
-          console.log(this.dataResults)
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+
+    onWordClick(word) {
+      this.$router.push(`/${word}`)
     }
   }
 }
@@ -39,7 +58,7 @@ export default {
         <HomeCmp @search="searchData" />
       </section>
       <div v-if="dataResults" class="bg-white dark:bg-black mt-9">
-        <SearchResults :data="dataResults" />
+        <SearchResults :data="dataResults" @word-click="onWordClick" />
       </div>
     </div>
     <footer v-if="dataResults" class="mt-14 pb-5">

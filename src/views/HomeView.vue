@@ -1,14 +1,24 @@
 <script>
 import HomeCmp from '../components/HomeCmp.vue'
+import LoaderCmp from '../components/LoaderCmp.vue'
 
 export default {
   components: {
-    HomeCmp
+    HomeCmp,
+    LoaderCmp
   },
   props: ['data'],
+  data() {
+    return {
+      isLoading: false
+    }
+  },
   methods: {
     handleSearch(searchWord) {
-      this.$router.push(`/${searchWord}`)
+      this.isLoading = true
+      setTimeout(() => {
+        this.$router.push(`/${searchWord}`)
+      }, 3000)
     }
   }
 }
@@ -18,6 +28,8 @@ export default {
   <div class="w-full h-screen bg-white dark:bg-black">
     <div id="container" class="lg:mx-auto max-w-[90%] lg:w-[80%]">
       <HomeCmp @search="handleSearch" />
+      <!--display loader if isLoading is true-->
+      <LoaderCmp v-if="isLoading" />
     </div>
   </div>
 </template>

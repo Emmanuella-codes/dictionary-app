@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="mb-6 text-gray-500 max-w-[75%] mx-auto bg-white dark:bg-black" id="footer">
+  <div class="mb-6 text-gray-500 max-w-[80%] mx-auto bg-white dark:bg-black" id="footer">
     <h4 class="italic text-gray-800 dark:text-slate-300 border-t-2 pt-3 text-lg">Source</h4>
     <ul class="pb-2">
       <li>
