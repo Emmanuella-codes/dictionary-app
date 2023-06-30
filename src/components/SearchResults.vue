@@ -1,5 +1,11 @@
 <script>
 export default {
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
   methods: {
     playAudio(sound) {
       if (sound) {
@@ -15,7 +21,7 @@ export default {
   <div id="content-container" class="w-full bg-white dark:bg-black">
     <h1 class="text-center text-lg text-[#a58edb]">Search results for : {{ data[0].word }}</h1>
     <!--search result from api-->
-    <div class="max-w-[90%] mx-auto">
+    <div v-if="data" class="max-w-[90%] mx-auto">
       <!--word and audio-->
       <div class="flex justify-between my-14" id="search-header">
         <div id="word">
