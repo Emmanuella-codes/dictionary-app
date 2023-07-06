@@ -87,17 +87,17 @@ const isDark = useDark()
   }
 
   .slider::before {
-    top: 11px;
+    top: 8px;
     left: 5px;
-    width: 13px;
-    height: 13px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
   }
 
   .checkbox:checked ~ .slider::before {
-    -webkit-transform: translateX(10px);
-    -ms-transform: translateX(10px);
-    transform: translateX(53px);
+    -webkit-transform: translateX(48px);
+    -ms-transform: translateX(48px);
+    transform: translateX(48px);
   }
 }
 </style>

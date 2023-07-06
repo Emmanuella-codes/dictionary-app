@@ -1,13 +1,22 @@
-<script></script>
+<script>
+export default {
+  props: {
+    errorData: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>
 
 <template>
-  <div class="container">
+  <div class="container mx-auto">
     <div class="card">
-      <div>
-        <h3>{{ data.title }}</h3>
-        <h4>{{ data.message }}</h4>
+      <div class="flex flex-col items-center text-center my-5 px-4">
+        <h3 class="lg:text-xl text-lg dark:text-slate-300 font-semibold">{{ errorData.title }}</h3>
+        <h4 class="lg:text-xl text-lg dark:text-slate-300 font-medium">{{ errorData.message }}</h4>
       </div>
-      <img src="../assets/blank.svg" alt="not found image" />
+      <img src="../assets/blank.svg" alt="not found image" class="mx-auto" />
     </div>
   </div>
 </template>
@@ -22,19 +31,12 @@
   border-radius: 10px;
 }
 
-.card {
+ .card {
   cursor: default;
   width: 100%;
   height: 100%;
   position: relative;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 34px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #212121;
   background-color: rgba(255, 255, 255, 0.074);
   border: 1px solid rgba(255, 255, 255, 0.222);
   -webkit-backdrop-filter: blur(20px);
@@ -80,5 +82,5 @@
 .container:hover::before {
   left: -10px;
   transform: scale(1.2);
-}
+} 
 </style>
