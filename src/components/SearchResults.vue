@@ -34,7 +34,7 @@ export default {
           </h2>
           <h3
             id="italicWord"
-            class="lg:text-2xl text-xl lg:pt-3 text-[#aa8eeb]"
+            class="lg:text-2xl text-xl pt-2 lg:pt-3 text-[#aa8eeb]"
             v-if="data[0].phonetic"
           >
             {{ data[0].phonetic }}
@@ -59,8 +59,8 @@ export default {
         </div>
         <div id="first-meaning" class="mt-3">
           <h3 class="text-xl dark:text-slate-200 mb-2">Meaning</h3>
-          <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-            <li v-for="def in data[0].meanings[0].definitions.slice(0, 7)" :key="def">
+          <ul class="space-y-1 text-gray-600 list-disc list-inside dark:text-gray-400">
+            <li v-for="def in data[0].meanings[0].definitions.slice(0, 7)" :key="def" class="lg:text-lg">
               {{ def.definition }}
             </li>
           </ul>
@@ -72,7 +72,7 @@ export default {
               data[0].meanings[0].definitions[1]?.example
             "
           >
-            <h4 class="mb-3 dark:text-slate-200">Examples</h4>
+            <h4 class="mb-3 dark:text-slate-200 text-lg">Examples</h4>
             <div class="ml-6 flex gap-2 mb-2" v-if="data[0].meanings[0].definitions[0]?.example">
               <span class="border-l-4"></span>
               <p class="dark:text-slate-400">{{ data[0].meanings[0].definitions[0].example }}</p>
@@ -85,7 +85,7 @@ export default {
 
           <!--synonyms-->
           <div class="mt-4" v-if="data[0].meanings[0]?.synonyms.length">
-            <h4 class="italic dark:text-slate-200 text-lg">Synonyms</h4>
+            <h4 class="italic dark:text-slate-200 text-xl">Synonyms</h4>
             <ul class="flex flex-row lg:gap-3 flex-wrap gap-2">
               <li
                 v-for="synonym in data[0].meanings[0].synonyms"
@@ -99,7 +99,7 @@ export default {
           </div>
           <!--antonyms-->
           <div class="mt-4" v-if="data[0].meanings[0]?.antonyms.length">
-            <h4 class="italic dark:text-slate-200 text-lg">Antonyms</h4>
+            <h4 class="italic dark:text-slate-200 text-xl">Antonyms</h4>
             <ul class="flex flex-row lg:gap-3 flex-wrap gap-2">
               <li
                 v-for="antonym in data[0].meanings[0].antonyms"
@@ -126,13 +126,13 @@ export default {
         <div id="second-meaning" class="mt-3">
           <h3 class="text-xl dark:text-slate-200 mb-2">Meaning</h3>
           <ul class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-            <li v-for="def in data[0].meanings[1].definitions.slice(0, 3)" :key="def">
+            <li v-for="def in data[0].meanings[1].definitions.slice(0, 3)" :key="def" class="text-lg">
               {{ def.definition }}
             </li>
           </ul>
           <!--synonyms-->
           <div class="mt-4" v-if="data[0].meanings[1]?.synonyms.length">
-            <h4 class="italic dark:text-slate-200 text-lg">Synonyms</h4>
+            <h4 class="italic dark:text-slate-200 text-xl">Synonyms</h4>
             <ul class="flex flex-row lg:gap-3 flex-wrap gap-2">
               <li
                 v-for="synonym in data[0].meanings[1].synonyms"
@@ -146,7 +146,7 @@ export default {
           </div>
           <!--antonyms-->
           <div class="mt-4" v-if="data[0].meanings[1]?.antonyms.length">
-            <h4 class="italic dark:text-slate-200 text-lg">Antonyms</h4>
+            <h4 class="italic dark:text-slate-200 text-xl">Antonyms</h4>
             <ul class="flex flex-row lg:gap-3 flex-wrap gap-2">
               <li
                 v-for="antonym in data[0].meanings[1].antonyms"

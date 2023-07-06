@@ -53,7 +53,6 @@ export default {
               message: err.response.data.message
             }
           }
-          console.log(err)
         })
         .finally(() => (this.isLoading = false))
     },
