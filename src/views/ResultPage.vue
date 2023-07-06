@@ -1,15 +1,19 @@
 <script>
 import SearchResults from '../components/SearchResults.vue'
 import HomeCmp from '../components/HomeCmp.vue'
-// import LoaderCmp from '../components/LoaderCmp.vue'
+import LoaderCmp from '../components/LoaderCmp.vue'
 import FooterCmp from '../components/FooterCmp.vue'
+import ErrorCmp from '../components/ErrorCmp.vue'
+
 import axios from 'axios'
 
 export default {
   components: {
     SearchResults,
     HomeCmp,
-    FooterCmp
+    FooterCmp,
+    ErrorCmp,
+    LoaderCmp
   },
   data() {
     return {
@@ -36,11 +40,11 @@ export default {
   },
   methods: {
     searchData(searchWord) {
+      this.isLoading = true
       axios
         .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`)
         .then((res) => {
           this.dataResults = res.data
-          this.isLoading = true
         })
         .catch((err) => {
           if (err) {
@@ -48,10 +52,10 @@ export default {
               title: err.response.data.title,
               message: err.response.data.message
             }
-            this.$router.push('/not-found')
           }
           console.log(err)
         })
+        .finally(() => (this.isLoading = false))
     },
 
     onWordClick(word) {
@@ -68,8 +72,14 @@ export default {
       <section>
         <HomeCmp @search="searchData" />
       </section>
-      <div v-if="dataResults" class="bg-white dark:bg-black mt-9">
+      <div v-if="isLoading" class="bg-white dark:bg-black mt-9">
+        <LoaderCmp />
+      </div>
+      <div v-else-if="dataResults" class="bg-white dark:bg-black mt-9">
         <SearchResults :data="dataResults" @word-click="onWordClick" />
+      </div>
+      <div v-else-if="errorResult" class="bg-white dark:bg-black mt-9">
+        <ErrorCmp :errorData="errorResult" />
       </div>
     </div>
     <footer v-if="dataResults" class="mt-14 pb-5">
