@@ -35,6 +35,7 @@ export default {
           type="text"
           name="search"
           class="input dark:text-slate-100"
+          @keydown.enter="handleSearch"
         />
         <span class="highlight"></span>
         <span class="bar"></span>
