@@ -40,7 +40,7 @@ export default {
             {{ data[0].phonetic }}
           </h3>
         </div>
-        <div id="audio-btn">
+        <div id="audio-btn" v-if="data[0].phonetics.length > 0">
           <button
             @click="playAudio(`${data[0].phonetics[0].audio}`)"
             v-if="data[0].phonetics[0].audio"
