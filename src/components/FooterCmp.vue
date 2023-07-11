@@ -14,6 +14,9 @@ export default {
         >
       </li>
     </ul>
+    <div class="flex items-center mx-auto justify-center mt-3">
+      <h5>Built with ❤️ by Emmanuella ✨</h5>
+    </div>
   </div>
 </template>
 
